@@ -1,3 +1,7 @@
+/*
+The Mandelbrot Set Logic
+*/
+
 var Mandelbrot = function(maxIterations) {
 	// maxIterations will either be a number or object containing it
 	// otherwise it defaults to 256
@@ -25,6 +29,7 @@ var Mandelbrot = function(maxIterations) {
 		return i;
 	};
 
+	// Calculates the pixel distance for a zoom level
 	this.calculatePixelDistance = function(n) {
 		// Pixel distance is 2^-n or 2 to the minus n
 		var twoToTheN = 1;
