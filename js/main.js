@@ -9,23 +9,29 @@ $(document).ready(function() {
 
 	context.fillStyle = '#EFEFEF';
 	context.fillRect(0,0,width,height);
-	graphics.drawPixel(50,50,255,0,0);
 	var pixelDistance = mandelbrot.calculatePixelDistance(8);
-	console.log('GENERATING');
 	var centerX = -0.5, centerY = 0;
-	var x, y = centerY-((height/2)*pixelDistance);
-	for (var r = 0; r < height; r++) {
-		x = centerX-((width/2)*pixelDistance);
-		for (var c = 0; c < width; c++) {
-			var iterations = mandelbrot.calculateIterations(x,y);
-			if (iterations == mandelbrot.maxIterations) {
-				graphics.drawPixel(c,r,0,0,0);
-			} else {
-				graphics.drawPixel(c,r,iterations,0,0);
-			}
-			x += pixelDistance;
-		}
-		y += pixelDistance;
-	}
 
+	function draw() {
+		console.log('GENERATING');
+		var x, y = centerY-((height/2)*pixelDistance);
+		for (var r = 0; r < height; r++) {
+			x = centerX-((width/2)*pixelDistance);
+			for (var c = 0; c < width; c++) {
+				var iterations = mandelbrot.calculateIterations(x,y);
+				if (iterations == mandelbrot.maxIterations) {
+					graphics.drawPixel(c,r,0,0,0);
+				} else {
+					graphics.drawPixel(c,r,iterations,0,0);
+				}
+				x += pixelDistance;
+			}
+			y += pixelDistance;
+		}
+	}
+	draw();
+	$('#btn').click(function() {
+		centerX += 0.1;
+		draw();
+	});
 });
